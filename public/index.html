@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>فلوسك | شارك الآن وكن أحد الفائزين</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: -2px;
+            padding: 0;
+        }
+
+        :root {
+            --navy: #08233f;
+            --navy-light: #0d3155;
+            --blue: #1756d1;
+            --red: #e11d2e;
+            --red-bg: #fff1f2;
+            --gold: #eab308;
+            --bg: #eef3f8;
+            --white: #fff;
+
+            --shadow: 0 12px 35px rgba(8, 35, 63, .10);
+            --soft-shadow: 0 5px 18px rgba(8, 35, 63, .07);
+            --radius: 22px;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(23, 86, 209, .06), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(234, 179, 8, .05), transparent 30%),
+                var(--bg);
+
+            font-family: "Tajawal", "Segoe UI", sans-serif;
+            color: var(--navy);
+        }
+
+        .page {
+            width: min(1500px, 100%);
+            min-height: 100vh;
+            margin: auto;
+            padding: 20px 40px 12px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Top Bar */
+        .topbar {
+            height: 58px;
+            padding: 8px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            width: 48px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-badge img {
+            width: 200%;
+            height: 200%;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+
+        .live {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 15px;
+            background: var(--red-bg);
+            color: var(--red);
+            border-radius: 50px;
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: .45;
+                transform: scale(.75);
+            }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 360px;
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 15px;
+        }
+
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            background: rgba(23, 86, 209, .06);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .qr-image {
+            position: relative;
+            z-index: 1;
+            object-fit: contain;
+            background: transparent;
+            border: none;
+            padding: 0;
+            filter: drop-shadow(0 10px 18px rgba(8, 35, 63, .10));
+        }
+
+        .qr-image:first-child {
+            width: 240px;
+            height: 240px;
+        }
+
+        .qr-image:nth-child(2) {
+            width: 330px;
+            height: 250px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px 45px 30px 20px;
+        }
+
+        .badge {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding: 6px 15px;
+            background: var(--red-bg);
+            color: var(--red);
+            border: 1px solid rgba(225, 29, 46, .1);
+            border-radius: 50px;
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        .badge span {
+            width: 7px;
+            height: 7px;
+            background: var(--red);
+            border-radius: 50%;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            line-height: 1.05;
+            font-weight: 900;
+        }
+
+        h1 strong {
+            color: var(--blue);
+            position: relative;
+        }
+
+        h1 strong::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: -2px;
+            height: 5px;
+            background: var(--gold);
+            opacity: .55;
+            border-radius: 10px;
+        }
+
+        .subtitle {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 12px;
+            color: var(--red);
+            font-size: clamp(1rem, 1.7vw, 1.35rem);
+            font-weight: 800;
+        }
+
+        .subtitle svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .description {
+            max-width: 650px;
+            margin-bottom: 17px;
+            color: #475569;
+            font-size: clamp(.9rem, 1.3vw, 1.05rem);
+            line-height: 1.75;
+            font-weight: 500;
+        }
+
+        .action {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: var(--blue);
+            color: white;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 800;
+            box-shadow: 0 9px 22px rgba(23, 86, 209, .25);
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .action:hover {
+            background: #1244a8;
+            transform: translateY(-2px);
+        }
+
+        .action:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .action svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Contest countdown */
+        .countdown-card {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+            padding: 10px 16px;
+            background: #eef4ff;
+            border: 1px solid rgba(23, 86, 209, .14);
+            border-radius: 16px;
+        }
+
+        .countdown-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            background: var(--blue);
+            color: white;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .countdown-icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .countdown-label {
+            color: #475569;
+            font-size: .78rem;
+            font-weight: 700;
+        }
+
+        .countdown-time {
+            direction: ltr;
+            color: var(--blue);
+            font-size: 1.45rem;
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .countdown-card.is-ending {
+            background: var(--red-bg);
+            border-color: rgba(225, 29, 46, .18);
+        }
+
+        .countdown-card.is-ending .countdown-icon {
+            background: var(--red);
+        }
+
+        .countdown-card.is-ending .countdown-time {
+            color: var(--red);
+        }
+
+        .countdown-card.is-ending .countdown-icon {
+            color: white;
+        }
+
+        .countdown-card.is-finished {
+            background: var(--red-bg);
+            border-color: rgba(225, 29, 46, .18);
+        }
+
+        .countdown-card.is-finished .countdown-icon,
+        .countdown-card.is-finished .countdown-time {
+            color: var(--red);
+        }
+
+        .error {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: var(--red-bg);
+            color: var(--red);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Processing overlay / panel */
+        .contest-ended-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 270px;
+            padding: 30px 25px;
+            text-align: center;
+            background: linear-gradient(145deg, #fff1f2, #ffffff);
+            border: 2px solid rgba(225, 29, 46, .18);
+            border-radius: 20px;
+        }
+
+        .contest-ended-icon {
+            width: 68px;
+            height: 68px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 15px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 10px 22px rgba(225, 29, 46, .22);
+        }
+
+        .contest-ended-icon svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .contest-ended-title {
+            margin-bottom: 8px;
+            color: var(--red);
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            font-weight: 900;
+        }
+
+        .contest-ended-text {
+            max-width: 430px;
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        .hero.is-ended .hero-image {
+            opacity: .42;
+            filter: grayscale(1);
+            transition: opacity .35s ease, filter .35s ease;
+        }
+
+        .processing-panel {
+            margin-top: 15px;
+            padding: 20px;
+            background: #f8fafc;
+            border: 2px dashed var(--blue);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Bottom */
+        .bottom {
+            display: grid;
+            grid-template-columns: 1.25fr .85fr;
+            gap: 14px;
+        }
+
+        .panel {
+            min-height: 190px;
+            padding: 18px 22px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--soft-shadow);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .panel-icon {
+            width: 38px;
+            height: 21px;
+            display: grid;
+            place-items: center;
+            background: var(--navy);
+            color: white;
+            border-radius: 11px;
+        }
+
+        .panel-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 46px;
+            height: 46px;
+            margin: auto auto 8px;
+            display: grid;
+            place-items: center;
+            background: var(--blue);
+            color: white;
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 13px rgba(23, 86, 209, .18);
+        }
+
+        .step-number svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .step-text {
+            padding: 0 4px;
+            color: var(--navy);
+            font-size: .76rem;
+            line-height: 1.45;
+            font-weight: 700;
+        }
+
+        .step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 23px;
+            left: calc(-50% + 28px);
+            width: calc(100% - 55px);
+            border-top: 2px dashed #cbd5e1;
+        }
+
+        .terms {
+            margin-top: 14px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #eef4ff;
+            color: var(--blue);
+            border-radius: 12px;
+            font-size: .74rem;
+            font-weight: 800;
+        }
+
+        .terms svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Prizes */
+        .prizes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+        }
+
+        .prize {
+            padding: 13px 7px;
+            text-align: center;
+            border-radius: 16px;
+        }
+
+        .gold {
+            background: linear-gradient(145deg, #fff9e8, #fcefc4);
+            border: 1px solid #f4df9d;
+        }
+
+        .silver {
+            background: linear-gradient(145deg, #f7f9fb, #e8edf2);
+            border: 1px solid #dce3e9;
+        }
+
+        .bronze {
+            background: linear-gradient(145deg, #fff1e3, #f9dfc5);
+            border: 1px solid #efc89e;
+        }
+
+        .medal {
+            width: 38px;
+            height: 38px;
+            margin: auto auto 6px;
+            display: grid;
+            place-items: center;
+            color: white;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 900;
+        }
+
+        .medal.gold {
+            background: linear-gradient(145deg, #f8d970, #dca500);
+        }
+
+        .medal.silver {
+            background: linear-gradient(145deg, #cbd5e1, #718096);
+        }
+
+        .medal.bronze {
+            background: linear-gradient(145deg, #f2b273, #c76600);
+        }
+
+        .prize-name {
+            margin-bottom: 2px;
+            color: #475569;
+            font-size: .7rem;
+            font-weight: 700;
+        }
+
+        .amount {
+            font-size: clamp(1rem, 1.7vw, 1.35rem);
+            line-height: 1.2;
+            font-weight: 900;
+        }
+
+        .gold .amount {
+            color: #a87800;
+        }
+
+        .silver .amount {
+            color: #64748b;
+        }
+
+        .bronze .amount {
+            color: #92400e;
+        }
+
+        .currency {
+            color: #64748b;
+            font-size: .62rem;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            min-height: 43px;
+            padding: 7px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: white;
+            border-radius: 14px;
+            font-size: .75rem;
+            font-weight: 700;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .footer svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .camera-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 950px) {
+            .page { min-height: auto; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-image { order: 2; min-height: 270px; }
+            .hero-content { order: 1; align-items: center; text-align: center; padding: 30px 25px 15px; }
+            .bottom { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 650px) {
+            .page { padding: 10px; }
+            .topbar { height: 50px; padding: 7px 13px; }
+            .brand-badge { width: 32px; height: 32px; }
+            .brand-name { font-size: 1rem; }
+            .live { padding: 5px 9px; font-size: .65rem; }
+            .hero { border-radius: 18px; }
+            h1 { font-size: 2.2rem; }
+            .hero-image { min-height: 230px; }
+            .steps { grid-template-columns: repeat(2, 1fr); row-gap: 18px; }
+            .step::after { display: none !important; }
+            .panel { padding: 16px; }
+            .footer { flex-direction: column; gap: 7px; padding: 10px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-name"> </div>
+            </div>
+            <div class="brand-badge">
+                <img src="/l.jpg" alt="فلوسك">
+            </div>
+            <div id="contestStatus" class="live">
+                <span class="live-dot"></span>
+                <span>المسابقة متاحة الآن</span>
+            </div>
+        </header>
+
+        <section id="heroSection" class="hero">
+            <div class="hero-content" id="intro">
+                
+                <h1>
+                    شارك الآن
+                    <br>
+                    <strong>وكن أحد الفائزين!</strong>
+                </h1>
+
+                <div class="subtitle">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5m6-6-6 6 6 6"
+                              stroke="currentColor"
+                              stroke-width="2.2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+
+                    امسح الكود وشارك الآن
+
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14m-6-6 6 6-6 6"
+                              stroke="currentColor"
+                              stroke-width="2.2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <p class="description">
+                    امسح رمز QR وشارك في المسابقة للحصول على فرصة
+                    الفوز بقسائم مالية قيمة من محفظة فلوسك.
+                </p>
+
+                <div id="countdownCard" class="countdown-card" role="timer" aria-live="polite">
+                    <div class="countdown-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="13" r="7.5" stroke="currentColor" stroke-width="1.8"/>
+                            <path d="M12 9v4l2.5 1.5M9 3h6M12 3v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="countdown-label">الوقت المتبقي للمسابقة</div>
+                        <div id="countdown" class="countdown-time">٠٤:٠٠</div>
+                    </div>
+                </div>
+
+                <button id="startBtn" class="action" type="button">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h3m0 0v3m0-3 3 3m-6-6h3"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                    امسح رمز QR للمشاركة
+                </button>
+
+                <p id="errorMessage" class="error hidden"></p>
+            </div>
+
+            <div id="processing" class="hero-content hidden" style="align-items: center; text-align: center;">
+                <div class="loader"></div>
+                <h2 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 10px;">جارٍ إكمال التحدي...</h2>
+                <p style="color: #475569; font-size: 1rem;">يرجى الانتظار لحظات لتسجيل المشاركة.</p>
+            </div>
+
+            <div id="contestEndedPanel" class="hero-content hidden">
+                <div class="contest-ended-panel">
+                    <div class="contest-ended-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 7v5l3 2M12 3a9 9 0 1 0 9 9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="m17 3 4 0v4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="contest-ended-title">انتهت المسابقة</h2>
+                    <p class="contest-ended-text">انتهى الوقت المحدد للمشاركة. شكرًا لاهتمامك، ترقّبوا مسابقاتنا القادمة.</p>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="/D.png" alt="رمز QR الأول" class="qr-image">
+                <img src="/R.png" alt="رمز QR الثاني" class="qr-image">
+            </div>
+        </section>
+
+        <div class="bottom">
+            <section class="panel">
+                <div class="panel-header">
+                    <div class="panel-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="5" y="6" width="14" height="15" rx="2"
+                                  stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M9 12h6M9 16h4"
+                                  stroke="currentColor"
+                                  stroke-width="1.6"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="panel-title">كيفية المشاركة</h2>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="7" width="15" height="12" rx="2"
+                                      stroke="currentColor" stroke-width="1.7"/>
+                                <circle cx="10.5" cy="13" r="3"
+                                        stroke="currentColor" stroke-width="1.7"/>
+                            </svg>
+                        </div>
+                        <p class="step-text">
+                            افتح الكاميرا
+                            <br>
+                            على هاتفك
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 8V5a1 1 0 0 1 1-1h3M20 8V5a1 1 0 0 0-1-1h-3M4 16v3a1 1 0 0 0 1 1h3M20 16v3a1 1 0 0 1-1 1h-3"
+                                      stroke="currentColor"
+                                      stroke-width="1.7"
+                                      stroke-linecap="round"/>
+                                <rect x="9" y="9" width="6" height="6"
+                                      fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <p class="step-text">
+                            امسح
+                            <br>
+                            رمز QR
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"
+                                      stroke="currentColor"
+                                      stroke-width="1.7"/>
+                                <path d="m9 12 2 2 4-4"
+                                      stroke="currentColor"
+                                      stroke-width="1.7"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="step-text">
+                            وافق على
+                            <br>
+                            الشروط والأحكام
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 20l2-7 5 5-7 2z"
+                                      fill="currentColor"/>
+                                <path d="M9 15 19 5"
+                                      stroke="currentColor"
+                                      stroke-width="1.7"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p class="step-text">
+                            أكمل التسجيل
+                            <br>
+                            وادخل السحب
+                        </p>
+                    </div>
+                </div>
+
+                <div class="terms">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"
+                              stroke="currentColor"
+                              stroke-width="1.8"/>
+                        <path d="m9 12 2 2 4-4"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"/>
+                    </svg>
+                    تطبيق الشروط والأحكام إلزامي للمشاركة
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <div class="panel-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.6"/>
+                            <path d="M8 6H5a1 1 0 0 0 0 2 5 5 0 0 0 3 4.6M16 6h3a1 1 0 0 1 0 2 5 5 0 0 1-3 4.6"
+                                  stroke="currentColor"
+                                  stroke-width="1.6"
+                                  stroke-linecap="round"/>
+                            <path d="M12 13v4M9 20h6"
+                                  stroke="currentColor"
+                                  stroke-width="1.6"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="panel-title">جوائز المسابقة</h2>
+                </div>
+
+                <div class="prizes">
+                    <div class="prize gold">
+                        <div class="medal gold">1</div>
+                        <div class="prize-name">المركز الأول</div>
+                        <div class="amount">60,000</div>
+                        <div class="currency">ريال يمني</div>
+                    </div>
+
+                    <div class="prize silver">
+                        <div class="medal silver">2</div>
+                        <div class="prize-name">المركز الثاني</div>
+                        <div class="amount">50,000</div>
+                        <div class="currency">ريال يمني</div>
+                    </div>
+
+                    <div class="prize bronze">
+                        <div class="medal bronze">3</div>
+                        <div class="prize-name">المركز الثالث</div>
+                        <div class="amount">30,000</div>
+                        <div class="currency">ريال يمني</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-item">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"
+                          fill="currentColor"/>
+                </svg>
+                فلوسك.. أسهل وأسرع
+            </div>
+
+            <div class="footer-item">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1Z"
+                          fill="currentColor"/>
+                </svg>
+                8002424
+            </div>
+
+            <div class="footer-item">
+                تابعنا على وسائل التواصل الاجتماعي
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Hidden video & canvas for camera functionality -->
+    <video id="camera" autoplay playsinline muted class="camera-hidden"></video>
+    <canvas id="canvas" class="camera-hidden"></canvas>
+
+    <script src="/js/camera.js"></script>
+</body>
+</html>
