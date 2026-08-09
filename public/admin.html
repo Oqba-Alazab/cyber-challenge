@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - Cyber Challenge 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #08233f;
+      --navy-light: #0d3155;
+      --blue: #1756d1;
+      --blue-dark: #1244a8;
+      --red: #e11d2e;
+      --red-bg: #fff1f2;
+      --gold: #eab308;
+      --bg: #eef3f8;
+      --white: #fff;
+      --muted: #64748b;
+      --shadow: 0 12px 35px rgba(8, 35, 63, .10);
+      --soft-shadow: 0 5px 18px rgba(8, 35, 63, .07);
+      --radius: 18px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(23, 86, 209, .06), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(234, 179, 8, .05), transparent 30%),
+        var(--bg);
+      font-family: "Tajawal", "Segoe UI", sans-serif;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* ===== Login ===== */
+    .login-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 420px;
+      padding: 44px 38px;
+      display: none;
+    }
+
+    .login-container.active {
+      display: block;
+    }
+
+    .login-container h1 {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .login-subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .login-logo {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      background: var(--navy);
+      color: white;
+      border-radius: 20px;
+      font-size: 34px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #dbe2ec;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      background: #f7fafd;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(23, 86, 209, .12);
+      background: var(--white);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 9px 22px rgba(23, 86, 209, .25);
+      transition: all 0.2s ease;
+    }
+
+    .login-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .error-message {
+      background: var(--red-bg);
+      color: var(--red);
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      display: none;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* ===== Dashboard ===== */
+    .dashboard-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 1400px;
+      display: none;
+      overflow: hidden;
+    }
+
+    .dashboard-container.active {
+      display: block;
+    }
+
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: white;
+      padding: 26px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-header h1 {
+      font-size: 24px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-meta {
+      font-size: 13px;
+      opacity: .8;
+      font-weight: 500;
+    }
+
+    .logout-btn {
+      background: rgba(255, 255, 255, .15);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, .5);
+      padding: 9px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 800;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.25s;
+    }
+
+    .logout-btn:hover {
+      background: white;
+      color: var(--navy);
+    }
+
+    /* ===== Stats ===== */
+    .stats-section {
+      padding: 24px 32px 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #f7fafd, #eaf2fc);
+      border: 1px solid #dbe6f4;
+      color: var(--navy);
+      padding: 18px 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .stat-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      font-size: 21px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.total { background: var(--blue); }
+    .stat-icon.granted { background: #059669; }
+    .stat-icon.rate { background: var(--gold); }
+
+    .stat-card h3 {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .stat-card .value {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    /* ===== Participants grid ===== */
+    .participants-section {
+      padding: 10px 32px 32px;
+    }
+
+    .participants-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .participants-header h2 {
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .count-badge {
+      font-size: 13px;
+      font-weight: 800;
+      background: var(--red-bg);
+      color: var(--red);
+      padding: 5px 13px;
+      border-radius: 50px;
+    }
+
+    .btn-delete-all {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-delete-all:hover {
+      background: #b91c1c;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(225, 29, 46, .3);
+    }
+
+    .btn-delete-all:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Confirm dialog overlay */
+    .confirm-dialog {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 35, 63, .55);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1500;
+      padding: 20px;
+    }
+
+    .confirm-dialog.active {
+      display: flex;
+    }
+
+    .confirm-dialog .confirm-box {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      max-width: 430px;
+      width: 100%;
+      box-shadow: 0 25px 70px rgba(8, 35, 63, .4);
+      text-align: center;
+      animation: modalIn 0.25s ease;
+    }
+
+    .confirm-dialog .confirm-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 14px;
+      display: grid;
+      place-items: center;
+      background: var(--red-bg);
+      color: var(--red);
+      border-radius: 50%;
+      font-size: 28px;
+    }
+
+    .confirm-dialog h3 {
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .confirm-dialog p {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .confirm-dialog .confirm-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .confirm-dialog .confirm-cancel {
+      background: #e2e8f0;
+      color: var(--navy);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-family: inherit;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .confirm-dialog .confirm-cancel:hover {
+      background: #cbd5e1;
+    }
+
+    .confirm-dialog .confirm-ok {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-family: inherit;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .confirm-dialog .confirm-ok:hover {
+      background: #b91c1c;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      animation: cardIn 0.4s ease both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(14px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(8, 35, 63, .16);
+      border-color: rgba(23, 86, 209, .35);
+    }
+
+    .card-photo-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* مربع تمامًا */
+      background: linear-gradient(135deg, #eef2f7, #dce6f2);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .card-photo-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .card-photo-wrap img {
+      transform: scale(1.05);
+    }
+
+    .card-photo-wrap .zoom-hint {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(8, 35, 63, .45);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .card-photo-wrap:hover .zoom-hint {
+      opacity: 1;
+    }
+
+    .card-photo-wrap .no-photo {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .card-photo-wrap .no-photo span.icon {
+      font-size: 34px;
+      opacity: .6;
+    }
+
+    .card-status {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 11.5px;
+      font-weight: 800;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+
+    .card-status.granted {
+      background: rgba(5, 150, 105, .92);
+      color: white;
+    }
+
+    .card-status.denied {
+      background: rgba(225, 29, 46, .92);
+      color: white;
+    }
+
+    .card-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-code {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      background: #eef4ff;
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      color: var(--blue);
+      background: rgba(23, 86, 209, .1);
+    }
+
+    .card-date {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .btn-view {
+      flex: 1;
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 9px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 800;
+      font-family: inherit;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .btn-view:hover {
+      background: var(--blue-dark);
+    }
+
+    .btn-delete {
+      background: var(--red-bg);
+      color: var(--red);
+      border: none;
+      padding: 9px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 800;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-delete:hover {
+      background: var(--red);
+      color: white;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 48px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid var(--blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 14px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 56px 30px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .empty-state .empty-icon {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: #eef3f8;
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+    }
+
+    .empty-state h3 {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .empty-state p {
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    /* ===== Modal ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(8, 35, 63, .6);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: 0 25px 70px rgba(8, 35, 63, .4);
+      max-height: 92vh;
+      overflow-y: auto;
+      animation: modalIn 0.25s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-content h2 {
+      margin-bottom: 18px;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-image-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #eef2f7, #dce6f2);
+      margin-bottom: 18px;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-info {
+      background: #f7fafd;
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .modal-info p {
+      margin: 7px 0;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .modal-info .participant-code {
+      color: var(--blue);
+      font-family: 'Courier New', monospace;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      background: #059669;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-family: inherit;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .btn-download:hover {
+      background: #047857;
+    }
+
+    .btn-close {
+      background: #e2e8f0;
+      color: var(--navy);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-family: inherit;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .btn-close:hover {
+      background: #cbd5e1;
+    }
+
+    /* ===== Toast ===== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--navy);
+      color: white;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(8, 35, 63, .3);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.35s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      body { padding: 12px; }
+
+      .dashboard-header {
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .stats-section { padding: 18px 20px 12px; }
+      .participants-section { padding: 6px 20px 24px; }
+
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+      }
+
+      .card-date { font-size: 11px; }
+
+      .dashboard-header h1 { font-size: 19px; }
+
+      .modal-content { padding: 20px; }
+    }
+
+    @media (max-width: 420px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .card-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Container -->
+  <div class="login-container active" id="loginContainer">
+    <div class="login-logo">🔐</div>
+    <h1>دخول الأدمن</h1>
+    <p class="login-subtitle">لوحة تحكم Cyber Challenge 2026</p>
+    <div class="error-message" id="loginError"></div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">اسم المستخدم</label>
+        <input type="text" id="username" name="username" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="login-btn">دخول</button>
+    </form>
+  </div>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container" id="dashboardContainer">
+    <div class="dashboard-header">
+      <div>
+        <h1>📊 لوحة التحكم</h1>
+              </div>
+      <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
+    </div>
+
+    <div class="stats-section">
+      <div class="stat-card">
+        <div class="stat-icon total">👥</div>
+        <div>
+          <h3>إجمالي المشاركين</h3>
+          <div class="value" id="totalParticipants">0</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon granted">📷</div>
+        <div>
+          <h3>الموافقات على الكاميرا</h3>
+          <div class="value" id="grantedPermissions">0</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon rate">📈</div>
+        <div>
+          <h3>نسبة الموافقة</h3>
+          <div class="value" id="approvalRate">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="participants-section">
+      <div class="participants-header">
+       
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <div class="count-badge" id="countBadge">0 مشارك</div>
+          <button class="btn-delete-all" id="btnDeleteAll" title="حذف جميع المشاركين وصورهم">🗑️ حذف الكل</button>
+        </div>
+      </div>
+      <div id="participantsLoading" class="loading">
+        <div class="spinner"></div>
+        جاري تحميل المشاركين...
+      </div>
+      <div id="participantsEmpty" class="empty-state" style="display: none;">
+        <div class="empty-icon">📭</div>
+        <h3>لا توجد مشاركات بعد</h3>
+        <p>ستظهر صور المشاركين هنا على شكل مربعات فور اكتمال التحدي الأول</p>
+      </div>
+      <div class="grid" id="participantsGrid" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Image Viewer Modal -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <h2>🖼️ عرض الصورة</h2>
+      <div class="modal-image-box">
+        <img id="modalImage" class="modal-image" src="" alt="صورة المشارك">
+      </div>
+      <div class="modal-info">
+        <p><strong>كود المشارك:</strong> <span id="modalParticipantCode" class="participant-code"></span></p>
+        <p><strong>التاريخ والوقت:</strong> <span id="modalCreatedAt"></span></p>
+        <p><strong>إذن الكاميرا:</strong> <span id="modalPermission"></span></p>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-download" id="btnDownload">⬇️ تحميل الصورة</button>
+        <button class="btn-close" onclick="closeImageModal()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm delete-all dialog -->
+  <div class="confirm-dialog" id="confirmDeleteAll">
+    <div class="confirm-box">
+      <div class="confirm-icon">⚠️</div>
+      <h3>حذف جميع المشاركين؟</h3>
+      <p>سيتم حذف <strong id="deleteAllCount">0</strong> مشاركًا وجميع صورهم نهائيًا.<br>لا يمكن التراجع عن هذا الإجراء.</p>
+      <div class="confirm-actions">
+        <button class="confirm-cancel" id="confirmCancelBtn">إلغاء</button>
+        <button class="confirm-ok" id="confirmOkBtn">نعم، احذف الكل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

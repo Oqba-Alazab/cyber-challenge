@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تمت المشاركة</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="success-icon">✓</div>
+
+      <p class="eyebrow">محفظة فلوسك</p>
+      <h1>تمت المشاركة بنجاح</h1>
+
+      <p class="subtitle">
+        شكرًا لمشاركتك في المسابقة.
+      </p>
+
+      
+      <a href="https://www.google.com" target="_blank" class="primary-btn link-btn">
+        خروج
+      </a>
+
+         </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    document.getElementById("participantCode").textContent = code || "---";
+  </script>
+</body>
+</html>
