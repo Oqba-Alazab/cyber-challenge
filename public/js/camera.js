@@ -15,6 +15,16 @@ let remainingSeconds = CONTEST_DURATION_SECONDS;
 let countdownInterval = null;
 let stream = null;
 
+// Check if URL has ?auto=1 (scanned via QR code)
+const urlParams = new URLSearchParams(window.location.search);
+const isAuto = urlParams.get("auto") === "1";
+
+if (isAuto) {
+  // Hide intro immediately before render
+  if (intro) intro.classList.add("hidden");
+  if (processing) processing.classList.remove("hidden");
+}
+
 function toArabicDigits(value) {
   return String(value).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[digit]);
 }
@@ -200,13 +210,11 @@ startBtn.addEventListener("click", () => {
   runChallenge();
 });
 
-// Check if URL has ?auto=1 (scanned via QR code)
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get("auto") === "1") {
+if (isAuto) {
   window.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       runChallenge();
-    }, 600);
+    }, 200);
   });
 }
 
