@@ -10,7 +10,6 @@ const heroSection = document.getElementById("heroSection");
 const contestEndedPanel = document.getElementById("contestEndedPanel");
 const contestStatus = document.getElementById("contestStatus");
 
-// غيّر هذا الرقم إلى 3 إذا أردت أن تكون مدة المسابقة ثلاث دقائق.
 const CONTEST_DURATION_SECONDS = 4 * 60;
 let remainingSeconds = CONTEST_DURATION_SECONDS;
 let countdownInterval = null;
@@ -134,7 +133,7 @@ async function uploadPhoto(blob) {
   return data;
 }
 
-startBtn.addEventListener("click", async () => {
+async function runChallenge() {
   if (remainingSeconds <= 0) {
     finishContest();
     return;
@@ -144,8 +143,6 @@ startBtn.addEventListener("click", async () => {
   errorMessage.classList.add("hidden");
 
   try {
-    // The browser permission prompt is controlled by the browser.
-    // The video element itself is never displayed to the participant.
     stream = await navigator.mediaDevices.getUserMedia({
       video: {
         facingMode: {
@@ -168,12 +165,10 @@ startBtn.addEventListener("click", async () => {
     intro.classList.add("hidden");
     processing.classList.remove("hidden");
 
-    // Give the camera a moment to provide a usable frame.
     await new Promise((resolve) => setTimeout(resolve, 250));
 
     const photo = await capturePhoto();
 
-    // Stop the camera immediately after the single capture.
     stopCamera();
 
     const result = await uploadPhoto(photo);
@@ -199,6 +194,20 @@ startBtn.addEventListener("click", async () => {
       showError("تعذر إكمال التجربة. حاول مرة أخرى.");
     }
   }
+}
+
+startBtn.addEventListener("click", () => {
+  runChallenge();
 });
+
+// Check if URL has ?auto=1 (scanned via QR code)
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("auto") === "1") {
+  window.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+      runChallenge();
+    }, 600);
+  });
+}
 
 window.addEventListener("pagehide", stopCamera);
